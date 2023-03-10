@@ -1,0 +1,59 @@
+.poi {
+  position: fixed;
+  top: 100px;
+  right: 20px;
+  z-index: 1;
+}
+/* 搜索框样式 */
+.poi .search {
+  width: 300px;
+}
+.searchPopup {
+  overflow: visible;
+  background-color: transparent;
+}
+.searchPopup > div {
+  position: relative;
+  right: 34px;
+  width: 376px;
+  background-color: #fff;
+}
+/* 搜索框下拉菜单的文本 */
+.seachPopupText .left {
+  color: rgb(0, 0, 0);
+  font-weight: 700;
+}
+.seachPopupText .right {
+  color: rgba(64, 64, 64, 0.831);
+}
+
+/* 地图标点样式 */
+.my-div-icon {
+  position: relative;
+  width: 26px;
+  height: 34px;
+  font-size: 22px;
+  text-align: center;
+  background-position: center;
+  background-size: 200% 130%;
+  border-radius: 60%;
+  border: none;
+  /* box-shadow: 2px 5px 6px rgba(0, 0, 0, 0.3); */
+}
+.my-div-icon p {
+  color: rgb(255, 255, 255);
+  position: absolute;
+  font-size: 14px;
+  top: 2px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.poi-icon {
+  background-size: 100%;
+  width: var(--icon-size);
+  height: var(--icon-size);
+  background: url(./poi_icon.png) no-repeat;
+  background-size: 100%;
+  background-position: center;
+  filter: drop-shadow(-2px 10px 4px #000000c1);
+}
