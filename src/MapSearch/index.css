@@ -19,11 +19,11 @@
   background-color: #fff;
 }
 /* 搜索框下拉菜单的文本 */
-.seachPopupText .left {
+.searchPopupText .left {
   color: rgb(0, 0, 0);
   font-weight: 700;
 }
-.seachPopupText .right {
+.searchPopupText .right {
   color: rgba(64, 64, 64, 0.831);
 }
 

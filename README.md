@@ -1,70 +1,22 @@
-# Getting Started with Create React App
+**网络请求部分和文章有出入，以文章为准**
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+本项目是一个基于React的地图搜索组件demo项目，使用Leaflets插件作为地图容器，利用高德地图提供的poi接口实现地图搜索。
 
-## Available Scripts
+目的：将搜索功能封装成一个组件，以便其他项目可以通过引入此组件**快速添加**地图搜索功能。只需在已经使用Leaflets插件的项目中**新增一行代码**即可实现搜索功能，这样任何使用Leaflets插件的项目都能方便地添加地图搜索功能。
 
-In the project directory, you can run:
+```jsx
+//引入此项目
+import MapSearch from "@/components/MapSearch";
 
-### `npm start`
+//新增一行代码
+<MapSearch map={map}></MapSearch>
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+文章：[React+高德+Leaflets的简单地图搜索](https://juejin.cn/post/7208858443630624828)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+技术栈：[React](https://react.docschina.org/)、[Leaflets](https://leafletjs.cn/)、[高德搜索POI 2.0](https://developer.amap.com/api/webservice/guide/api/newpoisearch)
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+功能：
+1.  关键字搜索
+1.  结果标到地图上
+1.  鼠标移入结果列表，地图跳转到对应位置并弹窗

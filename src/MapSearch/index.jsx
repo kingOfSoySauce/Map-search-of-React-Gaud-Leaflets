@@ -8,23 +8,26 @@ import "./index.css";
 
 export default function Poi(props) {
   const { map } = props;
-  const selectRef = useRef(); //获取组件
-  const [timer, setTimer] = useState();
-  const [input, setInput] = useState();
-  const [select, setSelect] = useState();
-  const [showSearchPopup, setShowSearchPopup] = useState(false);
-  const [data, setData] = useState([]);
+  const selectRef = useRef(); //获取select组件
+
+  //状态
+  const [timer, setTimer] = useState(); //防抖
+  const [input, setInput] = useState(); //输入的关键字
+  const [select, setSelect] = useState(); //已选中的
+  const [showSearchPopup, setShowSearchPopup] = useState(false); //是否弹出下拉菜单
+  const [data, setData] = useState([]); //api响应结果
   const [group, setGroup] = useState(null); //保存了所有marker
 
   //输入地址列表,返回带jsx描述的列表,并且添加鼠标移入事件
-  const formatt = (list) => {
+  const format = (list) => {
     return list?.map((item) => {
       return {
         value: item.id, //id
         //将名称和地址拼接到一起
         label: (
           <div
-            className="seachPopupText"
+            className="searchPopupText"
+            title={item.address}
             //绑定鼠标移入事件
             onMouseEnter={(e) => {
               //当前没有选中时,弹出弹窗,有选中之后就不弹出了
@@ -87,30 +90,32 @@ export default function Poi(props) {
     setModalData = () => {},
     setModalOpen = () => {}
   ) => {
-    if (markList) {
-      markList.clearLayers();
-      setMarkList(null);
-    }
     let list = arr.map((item, index) => {
+      //转坐标系
       const [longitude, latitude] = coordtransform.gcj02towgs84(
         ...item.location?.split(",")
       );
 
+      //生成marker实例
       return new L.marker([latitude + "", longitude + ""], {
         icon: icon(item, index),
       })
         .bindPopup(popup(item), {
+          //绑定弹出框
           closeButton: false,
           keepInView: false, //在边界弹出时，不会被边界遮挡
           offset: L.point(0, -16), //往上偏移，不遮挡标点
         })
         .on("mouseover", function () {
+          //鼠标移入事件
           this.openPopup();
         })
         .on("mouseout", function () {
+          //鼠标移出事件
           this.closePopup();
         })
         .on("click", function (e) {
+          //鼠标点击事件，可以弹出弹出框
           setModalData(item);
           setModalOpen(true);
         });
@@ -131,9 +136,8 @@ export default function Poi(props) {
     }
   };
 
-  //侧边栏鼠标经过时，弹出悬浮框  参数：鼠标经过的item
+  //侧边栏鼠标经过时，弹出悬浮框  参数item：鼠标经过的item
   const textPopup = (item) => {
-    console.log(item);
     const [longitude, latitude] = coordtransform.gcj02towgs84(
       ...item.location?.split(",")
     );
@@ -157,11 +161,12 @@ export default function Poi(props) {
   //选中事件
   const onSelect = (value, item) => {
     if (item) {
+      //有选中
       setSelect(item);
       textPopup(item);
       setShowSearchPopup(false);
-      // selectRef.current.blur(); //失去焦点
     } else {
+      //清除选中
       setSelect(item);
       textPopup(item);
       setShowSearchPopup(true);
@@ -192,6 +197,7 @@ export default function Poi(props) {
   }, [data, map]);
   return (
     <div className="poi">
+      {/* 弹出下拉弹出的按钮 */}
       {data?.length !== 0 &&
         (showSearchPopup ? (
           <Button
@@ -206,6 +212,7 @@ export default function Poi(props) {
             icon={<DownOutlined />}
           ></Button>
         ))}
+      {/* 中间的选择组件 */}
       <Select
         className="search"
         popupClassName="searchPopup"
@@ -217,11 +224,12 @@ export default function Poi(props) {
         onSearch={setInput}
         onFocus={onFocus}
         filterOption={false} //不根据输入来检索,自己实现检索
-        options={formatt(data)}
+        options={format(data)}
         suffixIcon={<></>}
         open={showSearchPopup}
         ref={selectRef}
       />
+      {/* 搜索按钮 */}
       <Button
         type="primary"
         shape="round"

@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
 import * as L from "leaflet";
 import "leaflet/dist/leaflet.css";
-import Poi from "./Poi";
+import MapSearch from "./MapSearch";
 import "./App.css";
 
 function App() {
   const [map, setMap] = useState();
   useEffect(() => {
     if (map) return;
-    console.log("leaflet");
     const m = L.map("leaflet", {
       minZoom: 3,
       maxZoom: 14,
@@ -28,7 +27,7 @@ function App() {
   }, []);
   return (
     <div className="App">
-      <Poi map={map}></Poi>
+      <MapSearch map={map}></MapSearch>
       <div id="leaflet" className="map"></div>
     </div>
   );
